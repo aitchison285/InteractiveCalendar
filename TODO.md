@@ -21,11 +21,11 @@
   - [x] Stack navigator
   - [x] Bottom tab navigator
   - [x] Screen routing
-- [ ] Build common UI components
-  - [ ] Button component
-  - [ ] Card component
-  - [ ] Modal component
-  - [ ] LoadingSpinner component
+- [x] Build common UI components
+  - [x] Button component
+  - [x] Card component
+  - [x] Modal component
+  - [x] LoadingSpinner component
 - [ ] Create calendar UI components
   - [ ] CalendarView (day/week/month)
   - [ ] EventCard
