@@ -1,15 +1,37 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import Widget from './Widget';
 import CalendarWidget from './CalendarWidget';
 import ChoresWidget from './ChoresWidget';
 import MealWidget from './MealWidget';
+import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
 interface DashboardProps {
   layout?: 'default' | 'compact';
 }
 
 export default function Dashboard({ layout = 'default' }: DashboardProps) {
+  const events = useSelector((state: RootState) => state.calendar.events);
+  const chores = useSelector((state: RootState) => state.chores.chores);
+
+  // Calculate this week's events
+  const now = new Date();
+  const weekStart = startOfWeek(now);
+  const weekEnd = endOfWeek(now);
+  
+  const eventsThisWeek = events.filter((event) =>
+    isWithinInterval(new Date(event.startDate), { start: weekStart, end: weekEnd })
+  ).length;
+
+  // Calculate chore completion percentage
+  const totalChores = chores.length;
+  const completedChores = chores.filter((c) => c.status === 'completed').length;
+  const completionPercentage = totalChores > 0 
+    ? Math.round((completedChores / totalChores) * 100) 
+    : 0;
+
   if (layout === 'compact') {
     return (
       <ScrollView 
@@ -57,11 +79,11 @@ export default function Dashboard({ layout = 'default' }: DashboardProps) {
         <Widget title="📊 Quick Stats" size="small">
           <View style={styles.quickStats}>
             <View style={styles.quickStatItem}>
-              <Text style={styles.quickStatValue}>12</Text>
+              <Text style={styles.quickStatValue}>{eventsThisWeek}</Text>
               <Text style={styles.quickStatLabel}>Events This Week</Text>
             </View>
             <View style={styles.quickStatItem}>
-              <Text style={styles.quickStatValue}>85%</Text>
+              <Text style={styles.quickStatValue}>{completionPercentage}%</Text>
               <Text style={styles.quickStatLabel}>Chores Completed</Text>
             </View>
           </View>

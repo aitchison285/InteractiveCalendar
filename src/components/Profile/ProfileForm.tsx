@@ -6,6 +6,7 @@ import {
   TextInput,
   Switch,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import { Profile } from '../../types/profile.types';
 import Button from '../common/Button';
@@ -91,19 +92,19 @@ export default function ProfileForm({ profile, onSubmit, onCancel }: ProfileForm
         <Text style={styles.label}>Color</Text>
         <View style={styles.colorGrid}>
           {FAMILY_COLORS.map((c) => (
-            <View
+            <TouchableOpacity
               key={c}
               style={[
                 styles.colorOption,
                 { backgroundColor: c },
                 color === c && styles.colorOptionSelected,
               ]}
-              onTouchEnd={() => setColor(c)}
+              onPress={() => setColor(c)}
             >
               {color === c && (
                 <Text style={styles.colorCheckmark}>✓</Text>
               )}
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </View>
