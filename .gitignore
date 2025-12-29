@@ -61,7 +61,7 @@ yarn-error.log
 .env.production
 
 # Misc
-.vscode/
+# .vscode/ - keeping VS Code settings for team consistency
 *.log
 *.tmp
 /tmp/

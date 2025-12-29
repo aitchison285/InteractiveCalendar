@@ -1,0 +1,21 @@
+# VS Code Recommended Extensions
+
+## Required Extensions
+- **ES7+ React/Redux/React-Native snippets** (dsznajder.es7-react-js-snippets)
+- **ESLint** (dbaeumer.vscode-eslint)
+- **Prettier - Code formatter** (esbenp.prettier-vscode)
+- **TypeScript and JavaScript Language Features** (ms-vscode.vscode-typescript-next)
+- **React Native Tools** (msjsdiag.vscode-react-native)
+- **GitHub Copilot** (GitHub.copilot)
+- **GitHub Copilot Chat** (GitHub.copilot-chat)
+
+## Optional but Recommended
+- **Auto Rename Tag** (formulahendry.auto-rename-tag)
+- **Styled Components** (jpoissonnier.vscode-styled-components)
+- **Path Intellisense** (christian-kohler.path-intellisense)
+- **GitLens** (eamodio.gitlens)
+- **Color Highlight** (naumovs.color-highlight)
+
+## Installation
+Open VS Code and go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
+Search for each extension and click Install.
