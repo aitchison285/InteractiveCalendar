@@ -17,10 +17,10 @@
   - [x] AndroidManifest.xml
   - [x] build.gradle files
   - [x] Permissions setup
-- [ ] Implement React Navigation
-  - [ ] Stack navigator
-  - [ ] Bottom tab navigator
-  - [ ] Screen routing
+- [x] Implement React Navigation
+  - [x] Stack navigator
+  - [x] Bottom tab navigator
+  - [x] Screen routing
 - [ ] Build common UI components
   - [ ] Button component
   - [ ] Card component
