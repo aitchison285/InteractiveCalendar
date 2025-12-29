@@ -1,11 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { CalendarView } from '../components/Calendar';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CalendarScreen() {
+  const navigation = useNavigation();
+  const events = useSelector((state: RootState) => state.calendar.events);
+
+  const handleEventPress = (event: any) => {
+    navigation.navigate('EventDetail' as never, { eventId: event.id } as never);
+  };
+
+  const handleAddEvent = () => {
+    navigation.navigate('AddEvent' as never);
+  };
+
+  const handleDateSelect = (date: Date) => {
+    console.log('Date selected:', date);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Calendar Screen</Text>
-      <Text style={styles.subtitle}>Calendar Views - Coming Soon</Text>
+      <CalendarView
+        events={events}
+        onEventPress={handleEventPress}
+        onAddEvent={handleAddEvent}
+        onDateSelect={handleDateSelect}
+      />
     </View>
   );
 }
@@ -13,17 +36,6 @@ export default function CalendarScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#666',
   },
 });
