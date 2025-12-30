@@ -1,11 +1,40 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { addProfile, updateProfile, removeProfile } from '../store/slices/profileSlice';
+import { ProfileManager } from '../components/Profile';
+import { Profile } from '../types/profile.types';
 
 export default function ProfileSetupScreen() {
+  const dispatch = useDispatch();
+  const profiles = useSelector((state: RootState) => state.profile.profiles);
+
+  const handleAddProfile = (profileData: Omit<Profile, 'id' | 'createdAt'>) => {
+    const newProfile: Profile = {
+      ...profileData,
+      id: Date.now().toString(),
+      createdAt: new Date(),
+    };
+    dispatch(addProfile(newProfile));
+  };
+
+  const handleUpdateProfile = (id: string, profileData: Partial<Profile>) => {
+    dispatch(updateProfile({ id, changes: profileData }));
+  };
+
+  const handleDeleteProfile = (id: string) => {
+    dispatch(removeProfile(id));
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile Setup</Text>
-      <Text style={styles.subtitle}>Create your family profiles</Text>
+      <ProfileManager
+        profiles={profiles}
+        onAddProfile={handleAddProfile}
+        onUpdateProfile={handleUpdateProfile}
+        onDeleteProfile={handleDeleteProfile}
+      />
     </View>
   );
 }
@@ -13,17 +42,6 @@ export default function ProfileSetupScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#666',
   },
 });
